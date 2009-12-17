@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +60,8 @@
             this.lblTurn = new System.Windows.Forms.Label();
             this.tbHeading = new System.Windows.Forms.TextBox();
             this.lblHeading = new System.Windows.Forms.Label();
-            this.tbClimb = new System.Windows.Forms.TextBox();
-            this.lblClimb = new System.Windows.Forms.Label();
+            this.tbVS = new System.Windows.Forms.TextBox();
+            this.lblVS = new System.Windows.Forms.Label();
             this.cbASI = new System.Windows.Forms.ComboBox();
             this.lblASI = new System.Windows.Forms.Label();
             this.gbFSXValues = new System.Windows.Forms.GroupBox();
@@ -76,6 +77,9 @@
             this.cbAttitudeIndicator = new System.Windows.Forms.ComboBox();
             this.lblAttitudeIndicator = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.rtbMessages = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cbDisplay = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.gbFSXValues.SuspendLayout();
             this.gbInstrumentAssignments.SuspendLayout();
@@ -198,7 +202,7 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -213,14 +217,14 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // lblAirspeed
             // 
             this.lblAirspeed.AutoSize = true;
-            this.lblAirspeed.Location = new System.Drawing.Point(29, 34);
+            this.lblAirspeed.Location = new System.Drawing.Point(29, 46);
             this.lblAirspeed.Name = "lblAirspeed";
             this.lblAirspeed.Size = new System.Drawing.Size(48, 13);
             this.lblAirspeed.TabIndex = 5;
@@ -228,26 +232,26 @@
             // 
             // tbAirspeed
             // 
-            this.tbAirspeed.Location = new System.Drawing.Point(83, 31);
+            this.tbAirspeed.Location = new System.Drawing.Point(83, 43);
             this.tbAirspeed.Name = "tbAirspeed";
             this.tbAirspeed.ReadOnly = true;
-            this.tbAirspeed.Size = new System.Drawing.Size(65, 20);
+            this.tbAirspeed.Size = new System.Drawing.Size(93, 20);
             this.tbAirspeed.TabIndex = 6;
             this.tbAirspeed.Text = "999";
             // 
             // tbPitch
             // 
-            this.tbPitch.Location = new System.Drawing.Point(83, 57);
+            this.tbPitch.Location = new System.Drawing.Point(83, 69);
             this.tbPitch.Name = "tbPitch";
             this.tbPitch.ReadOnly = true;
-            this.tbPitch.Size = new System.Drawing.Size(65, 20);
+            this.tbPitch.Size = new System.Drawing.Size(93, 20);
             this.tbPitch.TabIndex = 8;
             this.tbPitch.Text = "999";
             // 
             // lblPitchAngle
             // 
             this.lblPitchAngle.AutoSize = true;
-            this.lblPitchAngle.Location = new System.Drawing.Point(46, 60);
+            this.lblPitchAngle.Location = new System.Drawing.Point(46, 72);
             this.lblPitchAngle.Name = "lblPitchAngle";
             this.lblPitchAngle.Size = new System.Drawing.Size(31, 13);
             this.lblPitchAngle.TabIndex = 7;
@@ -255,17 +259,17 @@
             // 
             // tbSlip
             // 
-            this.tbSlip.Location = new System.Drawing.Point(83, 161);
+            this.tbSlip.Location = new System.Drawing.Point(83, 173);
             this.tbSlip.Name = "tbSlip";
             this.tbSlip.ReadOnly = true;
-            this.tbSlip.Size = new System.Drawing.Size(65, 20);
+            this.tbSlip.Size = new System.Drawing.Size(93, 20);
             this.tbSlip.TabIndex = 10;
             this.tbSlip.Text = "999";
             // 
             // lblSlip
             // 
             this.lblSlip.AutoSize = true;
-            this.lblSlip.Location = new System.Drawing.Point(53, 164);
+            this.lblSlip.Location = new System.Drawing.Point(53, 176);
             this.lblSlip.Name = "lblSlip";
             this.lblSlip.Size = new System.Drawing.Size(24, 13);
             this.lblSlip.TabIndex = 9;
@@ -273,17 +277,17 @@
             // 
             // tbRoll
             // 
-            this.tbRoll.Location = new System.Drawing.Point(83, 83);
+            this.tbRoll.Location = new System.Drawing.Point(83, 95);
             this.tbRoll.Name = "tbRoll";
             this.tbRoll.ReadOnly = true;
-            this.tbRoll.Size = new System.Drawing.Size(65, 20);
+            this.tbRoll.Size = new System.Drawing.Size(93, 20);
             this.tbRoll.TabIndex = 12;
             this.tbRoll.Text = "999";
             // 
             // lblRoll
             // 
             this.lblRoll.AutoSize = true;
-            this.lblRoll.Location = new System.Drawing.Point(52, 86);
+            this.lblRoll.Location = new System.Drawing.Point(52, 98);
             this.lblRoll.Name = "lblRoll";
             this.lblRoll.Size = new System.Drawing.Size(25, 13);
             this.lblRoll.TabIndex = 11;
@@ -291,17 +295,17 @@
             // 
             // tbAltitude
             // 
-            this.tbAltitude.Location = new System.Drawing.Point(83, 109);
+            this.tbAltitude.Location = new System.Drawing.Point(83, 121);
             this.tbAltitude.Name = "tbAltitude";
             this.tbAltitude.ReadOnly = true;
-            this.tbAltitude.Size = new System.Drawing.Size(65, 20);
+            this.tbAltitude.Size = new System.Drawing.Size(93, 20);
             this.tbAltitude.TabIndex = 14;
             this.tbAltitude.Text = "99999";
             // 
             // lblAltitude
             // 
             this.lblAltitude.AutoSize = true;
-            this.lblAltitude.Location = new System.Drawing.Point(35, 112);
+            this.lblAltitude.Location = new System.Drawing.Point(35, 124);
             this.lblAltitude.Name = "lblAltitude";
             this.lblAltitude.Size = new System.Drawing.Size(42, 13);
             this.lblAltitude.TabIndex = 13;
@@ -309,17 +313,17 @@
             // 
             // tbTurn
             // 
-            this.tbTurn.Location = new System.Drawing.Point(83, 135);
+            this.tbTurn.Location = new System.Drawing.Point(83, 147);
             this.tbTurn.Name = "tbTurn";
             this.tbTurn.ReadOnly = true;
-            this.tbTurn.Size = new System.Drawing.Size(65, 20);
+            this.tbTurn.Size = new System.Drawing.Size(93, 20);
             this.tbTurn.TabIndex = 16;
             this.tbTurn.Text = "999";
             // 
             // lblTurn
             // 
             this.lblTurn.AutoSize = true;
-            this.lblTurn.Location = new System.Drawing.Point(48, 138);
+            this.lblTurn.Location = new System.Drawing.Point(48, 150);
             this.lblTurn.Name = "lblTurn";
             this.lblTurn.Size = new System.Drawing.Size(29, 13);
             this.lblTurn.TabIndex = 15;
@@ -327,39 +331,39 @@
             // 
             // tbHeading
             // 
-            this.tbHeading.Location = new System.Drawing.Point(83, 187);
+            this.tbHeading.Location = new System.Drawing.Point(83, 199);
             this.tbHeading.Name = "tbHeading";
             this.tbHeading.ReadOnly = true;
-            this.tbHeading.Size = new System.Drawing.Size(65, 20);
+            this.tbHeading.Size = new System.Drawing.Size(93, 20);
             this.tbHeading.TabIndex = 18;
             this.tbHeading.Text = "999";
             // 
             // lblHeading
             // 
             this.lblHeading.AutoSize = true;
-            this.lblHeading.Location = new System.Drawing.Point(30, 190);
+            this.lblHeading.Location = new System.Drawing.Point(30, 202);
             this.lblHeading.Name = "lblHeading";
             this.lblHeading.Size = new System.Drawing.Size(47, 13);
             this.lblHeading.TabIndex = 17;
             this.lblHeading.Text = "Heading";
             // 
-            // tbClimb
+            // tbVS
             // 
-            this.tbClimb.Location = new System.Drawing.Point(83, 213);
-            this.tbClimb.Name = "tbClimb";
-            this.tbClimb.ReadOnly = true;
-            this.tbClimb.Size = new System.Drawing.Size(65, 20);
-            this.tbClimb.TabIndex = 20;
-            this.tbClimb.Text = "9999";
+            this.tbVS.Location = new System.Drawing.Point(83, 225);
+            this.tbVS.Name = "tbVS";
+            this.tbVS.ReadOnly = true;
+            this.tbVS.Size = new System.Drawing.Size(93, 20);
+            this.tbVS.TabIndex = 20;
+            this.tbVS.Text = "9999";
             // 
-            // lblClimb
+            // lblVS
             // 
-            this.lblClimb.AutoSize = true;
-            this.lblClimb.Location = new System.Drawing.Point(45, 216);
-            this.lblClimb.Name = "lblClimb";
-            this.lblClimb.Size = new System.Drawing.Size(32, 13);
-            this.lblClimb.TabIndex = 19;
-            this.lblClimb.Text = "Climb";
+            this.lblVS.AutoSize = true;
+            this.lblVS.Location = new System.Drawing.Point(45, 228);
+            this.lblVS.Name = "lblVS";
+            this.lblVS.Size = new System.Drawing.Size(21, 13);
+            this.lblVS.TabIndex = 19;
+            this.lblVS.Text = "VS";
             // 
             // cbASI
             // 
@@ -380,12 +384,13 @@
             // 
             // gbFSXValues
             // 
+            this.gbFSXValues.Controls.Add(this.cbDisplay);
             this.gbFSXValues.Controls.Add(this.tbSlip);
             this.gbFSXValues.Controls.Add(this.lblAirspeed);
             this.gbFSXValues.Controls.Add(this.tbAirspeed);
-            this.gbFSXValues.Controls.Add(this.tbClimb);
+            this.gbFSXValues.Controls.Add(this.tbVS);
             this.gbFSXValues.Controls.Add(this.lblPitchAngle);
-            this.gbFSXValues.Controls.Add(this.lblClimb);
+            this.gbFSXValues.Controls.Add(this.lblVS);
             this.gbFSXValues.Controls.Add(this.tbPitch);
             this.gbFSXValues.Controls.Add(this.tbHeading);
             this.gbFSXValues.Controls.Add(this.lblSlip);
@@ -519,11 +524,39 @@
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
+            // rtbMessages
+            // 
+            this.rtbMessages.Location = new System.Drawing.Point(95, 291);
+            this.rtbMessages.Name = "rtbMessages";
+            this.rtbMessages.Size = new System.Drawing.Size(492, 157);
+            this.rtbMessages.TabIndex = 25;
+            this.rtbMessages.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // cbDisplay
+            // 
+            this.cbDisplay.AutoSize = true;
+            this.cbDisplay.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cbDisplay.Checked = true;
+            this.cbDisplay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbDisplay.Location = new System.Drawing.Point(38, 19);
+            this.cbDisplay.Name = "cbDisplay";
+            this.cbDisplay.Size = new System.Drawing.Size(60, 17);
+            this.cbDisplay.TabIndex = 21;
+            this.cbDisplay.Text = "Display";
+            this.cbDisplay.UseVisualStyleBackColor = true;
+            this.cbDisplay.CheckedChanged += new System.EventHandler(this.cbDisplay_CheckedChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 359);
+            this.ClientSize = new System.Drawing.Size(600, 460);
+            this.Controls.Add(this.rtbMessages);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.gbInstrumentAssignments);
             this.Controls.Add(this.gbFSXValues);
@@ -577,8 +610,8 @@
         private System.Windows.Forms.Label lblTurn;
         private System.Windows.Forms.TextBox tbHeading;
         private System.Windows.Forms.Label lblHeading;
-        private System.Windows.Forms.TextBox tbClimb;
-        private System.Windows.Forms.Label lblClimb;
+        private System.Windows.Forms.TextBox tbVS;
+        private System.Windows.Forms.Label lblVS;
         private System.Windows.Forms.ComboBox cbASI;
         private System.Windows.Forms.Label lblASI;
         private System.Windows.Forms.GroupBox gbFSXValues;
@@ -594,6 +627,9 @@
         private System.Windows.Forms.ComboBox cbAttitudeIndicator;
         private System.Windows.Forms.Label lblAttitudeIndicator;
         private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.RichTextBox rtbMessages;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox cbDisplay;
     }
 }
 
