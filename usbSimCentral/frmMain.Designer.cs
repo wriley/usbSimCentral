@@ -62,27 +62,21 @@
             this.lblHeading = new System.Windows.Forms.Label();
             this.tbVS = new System.Windows.Forms.TextBox();
             this.lblVS = new System.Windows.Forms.Label();
-            this.cbASI = new System.Windows.Forms.ComboBox();
-            this.lblASI = new System.Windows.Forms.Label();
-            this.gbFSXValues = new System.Windows.Forms.GroupBox();
-            this.gbInstrumentAssignments = new System.Windows.Forms.GroupBox();
-            this.cbVSI = new System.Windows.Forms.ComboBox();
-            this.lblVSI = new System.Windows.Forms.Label();
-            this.cbGyro = new System.Windows.Forms.ComboBox();
-            this.lblGyro = new System.Windows.Forms.Label();
-            this.cbTurnSlip = new System.Windows.Forms.ComboBox();
-            this.lblTurnSlip = new System.Windows.Forms.Label();
-            this.cbAltimeter = new System.Windows.Forms.ComboBox();
-            this.lblAltimeter = new System.Windows.Forms.Label();
-            this.cbAttitudeIndicator = new System.Windows.Forms.ComboBox();
-            this.lblAttitudeIndicator = new System.Windows.Forms.Label();
-            this.btnConnect = new System.Windows.Forms.Button();
-            this.rtbMessages = new System.Windows.Forms.RichTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.GroupBoxFSXValues = new System.Windows.Forms.GroupBox();
             this.cbDisplay = new System.Windows.Forms.CheckBox();
+            this.GroupBoxInstrumentAssignments = new System.Windows.Forms.GroupBox();
+            this.checkBoxVerticalSpeedIndicator = new System.Windows.Forms.CheckBox();
+            this.checkBoxHeadingIndicator = new System.Windows.Forms.CheckBox();
+            this.checkBoxTurnSlipIndicator = new System.Windows.Forms.CheckBox();
+            this.checkBoxAltimeter = new System.Windows.Forms.CheckBox();
+            this.checkBoxArtificialHorizon = new System.Windows.Forms.CheckBox();
+            this.checkBoxAirSpeedIndicator = new System.Windows.Forms.CheckBox();
+            this.ButtonConnect = new System.Windows.Forms.Button();
+            this.RichTextBoxMessages = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
-            this.gbFSXValues.SuspendLayout();
-            this.gbInstrumentAssignments.SuspendLayout();
+            this.GroupBoxFSXValues.SuspendLayout();
+            this.GroupBoxInstrumentAssignments.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -365,177 +359,31 @@
             this.lblVS.TabIndex = 19;
             this.lblVS.Text = "VS";
             // 
-            // cbASI
+            // GroupBoxFSXValues
             // 
-            this.cbASI.FormattingEnabled = true;
-            this.cbASI.Location = new System.Drawing.Point(6, 43);
-            this.cbASI.Name = "cbASI";
-            this.cbASI.Size = new System.Drawing.Size(121, 21);
-            this.cbASI.TabIndex = 21;
-            // 
-            // lblASI
-            // 
-            this.lblASI.AutoSize = true;
-            this.lblASI.Location = new System.Drawing.Point(54, 25);
-            this.lblASI.Name = "lblASI";
-            this.lblASI.Size = new System.Drawing.Size(24, 13);
-            this.lblASI.TabIndex = 22;
-            this.lblASI.Text = "ASI";
-            // 
-            // gbFSXValues
-            // 
-            this.gbFSXValues.Controls.Add(this.cbDisplay);
-            this.gbFSXValues.Controls.Add(this.tbSlip);
-            this.gbFSXValues.Controls.Add(this.lblAirspeed);
-            this.gbFSXValues.Controls.Add(this.tbAirspeed);
-            this.gbFSXValues.Controls.Add(this.tbVS);
-            this.gbFSXValues.Controls.Add(this.lblPitchAngle);
-            this.gbFSXValues.Controls.Add(this.lblVS);
-            this.gbFSXValues.Controls.Add(this.tbPitch);
-            this.gbFSXValues.Controls.Add(this.tbHeading);
-            this.gbFSXValues.Controls.Add(this.lblSlip);
-            this.gbFSXValues.Controls.Add(this.lblHeading);
-            this.gbFSXValues.Controls.Add(this.lblRoll);
-            this.gbFSXValues.Controls.Add(this.tbTurn);
-            this.gbFSXValues.Controls.Add(this.tbRoll);
-            this.gbFSXValues.Controls.Add(this.lblTurn);
-            this.gbFSXValues.Controls.Add(this.lblAltitude);
-            this.gbFSXValues.Controls.Add(this.tbAltitude);
-            this.gbFSXValues.Location = new System.Drawing.Point(12, 27);
-            this.gbFSXValues.Name = "gbFSXValues";
-            this.gbFSXValues.Size = new System.Drawing.Size(182, 256);
-            this.gbFSXValues.TabIndex = 23;
-            this.gbFSXValues.TabStop = false;
-            this.gbFSXValues.Text = "FSX Values";
-            // 
-            // gbInstrumentAssignments
-            // 
-            this.gbInstrumentAssignments.Controls.Add(this.cbVSI);
-            this.gbInstrumentAssignments.Controls.Add(this.lblVSI);
-            this.gbInstrumentAssignments.Controls.Add(this.cbGyro);
-            this.gbInstrumentAssignments.Controls.Add(this.lblGyro);
-            this.gbInstrumentAssignments.Controls.Add(this.cbTurnSlip);
-            this.gbInstrumentAssignments.Controls.Add(this.lblTurnSlip);
-            this.gbInstrumentAssignments.Controls.Add(this.cbAltimeter);
-            this.gbInstrumentAssignments.Controls.Add(this.lblAltimeter);
-            this.gbInstrumentAssignments.Controls.Add(this.cbAttitudeIndicator);
-            this.gbInstrumentAssignments.Controls.Add(this.lblAttitudeIndicator);
-            this.gbInstrumentAssignments.Controls.Add(this.cbASI);
-            this.gbInstrumentAssignments.Controls.Add(this.lblASI);
-            this.gbInstrumentAssignments.Location = new System.Drawing.Point(200, 27);
-            this.gbInstrumentAssignments.Name = "gbInstrumentAssignments";
-            this.gbInstrumentAssignments.Size = new System.Drawing.Size(387, 256);
-            this.gbInstrumentAssignments.TabIndex = 21;
-            this.gbInstrumentAssignments.TabStop = false;
-            this.gbInstrumentAssignments.Text = "Instrument Assignments";
-            // 
-            // cbVSI
-            // 
-            this.cbVSI.FormattingEnabled = true;
-            this.cbVSI.Location = new System.Drawing.Point(260, 139);
-            this.cbVSI.Name = "cbVSI";
-            this.cbVSI.Size = new System.Drawing.Size(121, 21);
-            this.cbVSI.TabIndex = 31;
-            // 
-            // lblVSI
-            // 
-            this.lblVSI.AutoSize = true;
-            this.lblVSI.Location = new System.Drawing.Point(314, 122);
-            this.lblVSI.Name = "lblVSI";
-            this.lblVSI.Size = new System.Drawing.Size(24, 13);
-            this.lblVSI.TabIndex = 32;
-            this.lblVSI.Text = "VSI";
-            // 
-            // cbGyro
-            // 
-            this.cbGyro.FormattingEnabled = true;
-            this.cbGyro.Location = new System.Drawing.Point(133, 139);
-            this.cbGyro.Name = "cbGyro";
-            this.cbGyro.Size = new System.Drawing.Size(121, 21);
-            this.cbGyro.TabIndex = 29;
-            // 
-            // lblGyro
-            // 
-            this.lblGyro.AutoSize = true;
-            this.lblGyro.Location = new System.Drawing.Point(182, 122);
-            this.lblGyro.Name = "lblGyro";
-            this.lblGyro.Size = new System.Drawing.Size(29, 13);
-            this.lblGyro.TabIndex = 30;
-            this.lblGyro.Text = "Gyro";
-            // 
-            // cbTurnSlip
-            // 
-            this.cbTurnSlip.FormattingEnabled = true;
-            this.cbTurnSlip.Location = new System.Drawing.Point(6, 139);
-            this.cbTurnSlip.Name = "cbTurnSlip";
-            this.cbTurnSlip.Size = new System.Drawing.Size(121, 21);
-            this.cbTurnSlip.TabIndex = 27;
-            // 
-            // lblTurnSlip
-            // 
-            this.lblTurnSlip.AutoSize = true;
-            this.lblTurnSlip.Location = new System.Drawing.Point(45, 121);
-            this.lblTurnSlip.Name = "lblTurnSlip";
-            this.lblTurnSlip.Size = new System.Drawing.Size(49, 13);
-            this.lblTurnSlip.TabIndex = 28;
-            this.lblTurnSlip.Text = "Turn Slip";
-            // 
-            // cbAltimeter
-            // 
-            this.cbAltimeter.FormattingEnabled = true;
-            this.cbAltimeter.Location = new System.Drawing.Point(260, 43);
-            this.cbAltimeter.Name = "cbAltimeter";
-            this.cbAltimeter.Size = new System.Drawing.Size(121, 21);
-            this.cbAltimeter.TabIndex = 25;
-            // 
-            // lblAltimeter
-            // 
-            this.lblAltimeter.AutoSize = true;
-            this.lblAltimeter.Location = new System.Drawing.Point(301, 26);
-            this.lblAltimeter.Name = "lblAltimeter";
-            this.lblAltimeter.Size = new System.Drawing.Size(47, 13);
-            this.lblAltimeter.TabIndex = 26;
-            this.lblAltimeter.Text = "Altimeter";
-            // 
-            // cbAttitudeIndicator
-            // 
-            this.cbAttitudeIndicator.FormattingEnabled = true;
-            this.cbAttitudeIndicator.Location = new System.Drawing.Point(133, 43);
-            this.cbAttitudeIndicator.Name = "cbAttitudeIndicator";
-            this.cbAttitudeIndicator.Size = new System.Drawing.Size(121, 21);
-            this.cbAttitudeIndicator.TabIndex = 23;
-            // 
-            // lblAttitudeIndicator
-            // 
-            this.lblAttitudeIndicator.AutoSize = true;
-            this.lblAttitudeIndicator.Location = new System.Drawing.Point(150, 26);
-            this.lblAttitudeIndicator.Name = "lblAttitudeIndicator";
-            this.lblAttitudeIndicator.Size = new System.Drawing.Size(87, 13);
-            this.lblAttitudeIndicator.TabIndex = 24;
-            this.lblAttitudeIndicator.Text = "Attitude Indicator";
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(12, 289);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
-            this.btnConnect.TabIndex = 24;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
-            // 
-            // rtbMessages
-            // 
-            this.rtbMessages.Location = new System.Drawing.Point(95, 291);
-            this.rtbMessages.Name = "rtbMessages";
-            this.rtbMessages.Size = new System.Drawing.Size(492, 157);
-            this.rtbMessages.TabIndex = 25;
-            this.rtbMessages.Text = "";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.GroupBoxFSXValues.Controls.Add(this.cbDisplay);
+            this.GroupBoxFSXValues.Controls.Add(this.tbSlip);
+            this.GroupBoxFSXValues.Controls.Add(this.lblAirspeed);
+            this.GroupBoxFSXValues.Controls.Add(this.tbAirspeed);
+            this.GroupBoxFSXValues.Controls.Add(this.tbVS);
+            this.GroupBoxFSXValues.Controls.Add(this.lblPitchAngle);
+            this.GroupBoxFSXValues.Controls.Add(this.lblVS);
+            this.GroupBoxFSXValues.Controls.Add(this.tbPitch);
+            this.GroupBoxFSXValues.Controls.Add(this.tbHeading);
+            this.GroupBoxFSXValues.Controls.Add(this.lblSlip);
+            this.GroupBoxFSXValues.Controls.Add(this.lblHeading);
+            this.GroupBoxFSXValues.Controls.Add(this.lblRoll);
+            this.GroupBoxFSXValues.Controls.Add(this.tbTurn);
+            this.GroupBoxFSXValues.Controls.Add(this.tbRoll);
+            this.GroupBoxFSXValues.Controls.Add(this.lblTurn);
+            this.GroupBoxFSXValues.Controls.Add(this.lblAltitude);
+            this.GroupBoxFSXValues.Controls.Add(this.tbAltitude);
+            this.GroupBoxFSXValues.Location = new System.Drawing.Point(12, 27);
+            this.GroupBoxFSXValues.Name = "GroupBoxFSXValues";
+            this.GroupBoxFSXValues.Size = new System.Drawing.Size(182, 256);
+            this.GroupBoxFSXValues.TabIndex = 23;
+            this.GroupBoxFSXValues.TabStop = false;
+            this.GroupBoxFSXValues.Text = "FSX Values";
             // 
             // cbDisplay
             // 
@@ -551,15 +399,113 @@
             this.cbDisplay.UseVisualStyleBackColor = true;
             this.cbDisplay.CheckedChanged += new System.EventHandler(this.cbDisplay_CheckedChanged);
             // 
+            // GroupBoxInstrumentAssignments
+            // 
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxVerticalSpeedIndicator);
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxHeadingIndicator);
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxTurnSlipIndicator);
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxAltimeter);
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxArtificialHorizon);
+            this.GroupBoxInstrumentAssignments.Controls.Add(this.checkBoxAirSpeedIndicator);
+            this.GroupBoxInstrumentAssignments.Location = new System.Drawing.Point(200, 27);
+            this.GroupBoxInstrumentAssignments.Name = "GroupBoxInstrumentAssignments";
+            this.GroupBoxInstrumentAssignments.Size = new System.Drawing.Size(387, 256);
+            this.GroupBoxInstrumentAssignments.TabIndex = 21;
+            this.GroupBoxInstrumentAssignments.TabStop = false;
+            this.GroupBoxInstrumentAssignments.Text = "Instrument Outputs";
+            // 
+            // checkBoxVerticalSpeedIndicator
+            // 
+            this.checkBoxVerticalSpeedIndicator.AutoSize = true;
+            this.checkBoxVerticalSpeedIndicator.Location = new System.Drawing.Point(240, 42);
+            this.checkBoxVerticalSpeedIndicator.Name = "checkBoxVerticalSpeedIndicator";
+            this.checkBoxVerticalSpeedIndicator.Size = new System.Drawing.Size(139, 17);
+            this.checkBoxVerticalSpeedIndicator.TabIndex = 38;
+            this.checkBoxVerticalSpeedIndicator.Text = "Vertical Speed Indicator";
+            this.checkBoxVerticalSpeedIndicator.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHeadingIndicator
+            // 
+            this.checkBoxHeadingIndicator.AutoSize = true;
+            this.checkBoxHeadingIndicator.Location = new System.Drawing.Point(128, 42);
+            this.checkBoxHeadingIndicator.Name = "checkBoxHeadingIndicator";
+            this.checkBoxHeadingIndicator.Size = new System.Drawing.Size(110, 17);
+            this.checkBoxHeadingIndicator.TabIndex = 37;
+            this.checkBoxHeadingIndicator.Text = "Heading Indicator";
+            this.checkBoxHeadingIndicator.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTurnSlipIndicator
+            // 
+            this.checkBoxTurnSlipIndicator.AutoSize = true;
+            this.checkBoxTurnSlipIndicator.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxTurnSlipIndicator.Name = "checkBoxTurnSlipIndicator";
+            this.checkBoxTurnSlipIndicator.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxTurnSlipIndicator.TabIndex = 36;
+            this.checkBoxTurnSlipIndicator.Text = "Turn/Slip Indicator";
+            this.checkBoxTurnSlipIndicator.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAltimeter
+            // 
+            this.checkBoxAltimeter.AutoSize = true;
+            this.checkBoxAltimeter.Location = new System.Drawing.Point(240, 19);
+            this.checkBoxAltimeter.Name = "checkBoxAltimeter";
+            this.checkBoxAltimeter.Size = new System.Drawing.Size(66, 17);
+            this.checkBoxAltimeter.TabIndex = 35;
+            this.checkBoxAltimeter.Text = "Altimeter";
+            this.checkBoxAltimeter.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxArtificialHorizon
+            // 
+            this.checkBoxArtificialHorizon.AutoSize = true;
+            this.checkBoxArtificialHorizon.Location = new System.Drawing.Point(128, 19);
+            this.checkBoxArtificialHorizon.Name = "checkBoxArtificialHorizon";
+            this.checkBoxArtificialHorizon.Size = new System.Drawing.Size(106, 17);
+            this.checkBoxArtificialHorizon.TabIndex = 34;
+            this.checkBoxArtificialHorizon.Text = "Attitude Indicator";
+            this.checkBoxArtificialHorizon.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAirSpeedIndicator
+            // 
+            this.checkBoxAirSpeedIndicator.AutoSize = true;
+            this.checkBoxAirSpeedIndicator.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxAirSpeedIndicator.Name = "checkBoxAirSpeedIndicator";
+            this.checkBoxAirSpeedIndicator.Size = new System.Drawing.Size(116, 17);
+            this.checkBoxAirSpeedIndicator.TabIndex = 33;
+            this.checkBoxAirSpeedIndicator.Text = "Air Speed Indicator";
+            this.checkBoxAirSpeedIndicator.UseVisualStyleBackColor = true;
+            // 
+            // ButtonConnect
+            // 
+            this.ButtonConnect.Location = new System.Drawing.Point(12, 289);
+            this.ButtonConnect.Name = "ButtonConnect";
+            this.ButtonConnect.Size = new System.Drawing.Size(75, 23);
+            this.ButtonConnect.TabIndex = 24;
+            this.ButtonConnect.Text = "Connect";
+            this.ButtonConnect.UseVisualStyleBackColor = true;
+            this.ButtonConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // RichTextBoxMessages
+            // 
+            this.RichTextBoxMessages.Location = new System.Drawing.Point(95, 291);
+            this.RichTextBoxMessages.Name = "RichTextBoxMessages";
+            this.RichTextBoxMessages.Size = new System.Drawing.Size(492, 157);
+            this.RichTextBoxMessages.TabIndex = 25;
+            this.RichTextBoxMessages.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 460);
-            this.Controls.Add(this.rtbMessages);
-            this.Controls.Add(this.btnConnect);
-            this.Controls.Add(this.gbInstrumentAssignments);
-            this.Controls.Add(this.gbFSXValues);
+            this.Controls.Add(this.RichTextBoxMessages);
+            this.Controls.Add(this.ButtonConnect);
+            this.Controls.Add(this.GroupBoxInstrumentAssignments);
+            this.Controls.Add(this.GroupBoxFSXValues);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
@@ -569,10 +515,10 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbFSXValues.ResumeLayout(false);
-            this.gbFSXValues.PerformLayout();
-            this.gbInstrumentAssignments.ResumeLayout(false);
-            this.gbInstrumentAssignments.PerformLayout();
+            this.GroupBoxFSXValues.ResumeLayout(false);
+            this.GroupBoxFSXValues.PerformLayout();
+            this.GroupBoxInstrumentAssignments.ResumeLayout(false);
+            this.GroupBoxInstrumentAssignments.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,24 +558,18 @@
         private System.Windows.Forms.Label lblHeading;
         private System.Windows.Forms.TextBox tbVS;
         private System.Windows.Forms.Label lblVS;
-        private System.Windows.Forms.ComboBox cbASI;
-        private System.Windows.Forms.Label lblASI;
-        private System.Windows.Forms.GroupBox gbFSXValues;
-        private System.Windows.Forms.GroupBox gbInstrumentAssignments;
-        private System.Windows.Forms.ComboBox cbVSI;
-        private System.Windows.Forms.Label lblVSI;
-        private System.Windows.Forms.ComboBox cbGyro;
-        private System.Windows.Forms.Label lblGyro;
-        private System.Windows.Forms.ComboBox cbTurnSlip;
-        private System.Windows.Forms.Label lblTurnSlip;
-        private System.Windows.Forms.ComboBox cbAltimeter;
-        private System.Windows.Forms.Label lblAltimeter;
-        private System.Windows.Forms.ComboBox cbAttitudeIndicator;
-        private System.Windows.Forms.Label lblAttitudeIndicator;
-        private System.Windows.Forms.Button btnConnect;
-        private System.Windows.Forms.RichTextBox rtbMessages;
+        private System.Windows.Forms.GroupBox GroupBoxFSXValues;
+        private System.Windows.Forms.GroupBox GroupBoxInstrumentAssignments;
+        private System.Windows.Forms.Button ButtonConnect;
+        private System.Windows.Forms.RichTextBox RichTextBoxMessages;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox cbDisplay;
+        private System.Windows.Forms.CheckBox checkBoxVerticalSpeedIndicator;
+        private System.Windows.Forms.CheckBox checkBoxHeadingIndicator;
+        private System.Windows.Forms.CheckBox checkBoxTurnSlipIndicator;
+        private System.Windows.Forms.CheckBox checkBoxAltimeter;
+        private System.Windows.Forms.CheckBox checkBoxArtificialHorizon;
+        private System.Windows.Forms.CheckBox checkBoxAirSpeedIndicator;
     }
 }
 

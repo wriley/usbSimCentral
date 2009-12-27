@@ -6,8 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 using Microsoft.FlightSimulator.SimConnect;
 using System.Runtime.InteropServices;
+using usbSimInstrument;
+using LibUsbDotNet.DeviceNotify;
 
 namespace usbSimCentral
 {
@@ -15,7 +18,6 @@ namespace usbSimCentral
     {
         private SimConnect simconnect = null;
         private const int WM_USER_SIMCONNECT = 0x0402;
-        private int response = 1;
         private string output = "\n\n\n\n\n\n\n\n\n\n";
         private bool displayValues = true;
 
@@ -27,6 +29,50 @@ namespace usbSimCentral
         private float slip;
         private float heading;
         private float vs;
+
+        private int airspeedPosition = int.MinValue;
+
+        private Instrument InstrumentASI;
+        private Instrument InstrumentAttitude;
+        private Instrument InstrumentAltimiter;
+        private Instrument InstrumentTurnSlip;
+        private Instrument InstrumentGyro;
+        private Instrument InstrumentVSI;
+
+        const int VENDOR_ID = 0x16C0;
+        const int PRODUCT_ID = 0x05DC;
+
+        public static DeviceNotifier DeviceNotifier = new DeviceNotifier();
+
+        double[] TableASI = new double[8];
+        double[] RawASI = new double[8];
+        double[] TableAttitude = new double[8];
+        double[] RawAttitude = new double[8];
+        double[] TableAltimeter = new double[8];
+        double[] RawAltimeter = new double[8];
+        double[] TableTurnSlip = new double[8];
+        double[] RawTurnSlip = new double[8];
+        double[] TableGyro = new double[8];
+        double[] RawGyro = new double[8];
+        double[] TableVSI = new double[8];
+        double[] RawVSI = new double[8];
+
+        Dictionary<double, double> LookupASI = new Dictionary<double,double>();
+        Dictionary<double, double> LookupAttitude = new Dictionary<double, double>();
+        Dictionary<double, double> LookupAltimeter = new Dictionary<double, double>();
+        Dictionary<double, double> LookupTurnSlip = new Dictionary<double, double>();
+        Dictionary<double, double> LookupGyro = new Dictionary<double, double>();
+        Dictionary<double, double> LookupVSI = new Dictionary<double, double>();
+
+        internal enum USBSIM_INSTRUMENT_ASSIGNMENTS
+        {
+            ASI = 1,
+            ATTITUDE = 2,
+            ALTIMETER = 3,
+            TURNSLIP = 4,
+            GYRO = 5,
+            VSI = 6,
+        };
 
         enum DEFINITIONS
         {
@@ -54,6 +100,155 @@ namespace usbSimCentral
             public float vs;
         };
 
+        private void OnDeviceNotifyEvent(object sender, DeviceNotifyEventArgs e)
+        {
+            if ((e.Device.IdVendor == VENDOR_ID) && (e.Device.IdProduct == PRODUCT_ID))
+            {
+
+                switch (e.EventType)
+                {
+                    case EventType.DeviceArrival:
+                        addDevice(e.Device.SerialNumber);
+                        break;
+                    case EventType.DeviceRemoveComplete:
+                        removeDevice(e.Device.SerialNumber);
+                        break;
+                }
+            }
+        }
+
+        private void addDevice(String serial)
+        {
+            displayText("Adding device: " + serial);
+
+            switch (serial)
+            {
+                case "1":
+                    InstrumentASI = new Instrument(serial);
+                    TableASI = InstrumentASI.ReadTable();
+                    RawASI = InstrumentASI.ReadTableRaw();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupASI.Add(TableASI[i], RawASI[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+                case "2":
+                    InstrumentAttitude = new Instrument(serial);
+                    TableAttitude = InstrumentAttitude.ReadTable();
+                    RawAttitude = InstrumentAttitude.ReadTableRaw();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupAttitude.Add(TableAttitude[i], RawAttitude[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+                case "3":
+                    InstrumentAltimiter = new Instrument(serial);
+                    TableASI = InstrumentAltimiter.ReadTable();
+                    RawASI = InstrumentAltimiter.ReadTableRaw();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupAltimeter.Add(TableAltimeter[i], RawAltimeter[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+                case "4":
+                    InstrumentTurnSlip = new Instrument(serial);
+                    TableTurnSlip = InstrumentTurnSlip.ReadTable();
+                    RawTurnSlip = InstrumentTurnSlip.ReadTableRaw();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupTurnSlip.Add(TableTurnSlip[i], RawTurnSlip[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+                case "5":
+                    InstrumentGyro = new Instrument(serial);
+                    TableGyro = InstrumentGyro.ReadTable();
+                    RawGyro = InstrumentGyro.ReadTableRaw();
+                    
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupGyro.Add(TableGyro[i], RawGyro[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+                case "6":
+                    InstrumentVSI = new Instrument(serial);
+                    TableVSI = InstrumentVSI.ReadTable();
+                    RawVSI = InstrumentVSI.ReadTableRaw();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        try
+                        {
+                            LookupVSI.Add(TableVSI[i], RawVSI[i]);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            Debug.WriteLine("Exception: " + ex.Message);
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void removeDevice(String serial)
+        {
+            displayText("Removing device: " + serial);
+            switch (serial)
+            {
+                case "1":
+                    InstrumentASI = null;
+                    break;
+                case "2":
+                    InstrumentAttitude = null;
+                    break;
+                case "3":
+                    InstrumentAltimiter = null;
+                    break;
+                case "4":
+                    InstrumentTurnSlip = null;
+                    break;
+                case "5":
+                    InstrumentGyro = null;
+                    break;
+                case "6":
+                    InstrumentVSI = null;
+                    break;
+            }
+        }
+
         private void connectFSX()
         {
             try
@@ -61,8 +256,7 @@ namespace usbSimCentral
                 // the constructor is similar to SimConnect_Open in the native API 
                 simconnect = new SimConnect("Managed Data Request", this.Handle, WM_USER_SIMCONNECT, null, 0);
                 initDataRequest();
-                btnConnect.Text = "Disconnect";
-                instrumentSelectionStatus(false);
+                ButtonConnect.Text = "Disconnect";
             }
             catch (COMException ex)
             {
@@ -78,8 +272,7 @@ namespace usbSimCentral
                 simconnect.Dispose();
                 simconnect = null;
                 displayText("Connection closed");
-                btnConnect.Text = "Connect";
-                instrumentSelectionStatus(true);
+                ButtonConnect.Text = "Connect";
             }
         }
 
@@ -168,6 +361,8 @@ namespace usbSimCentral
                     heading = s1.heading;
                     vs = s1.vs;
 
+                    updateInstruments();
+
                     break;
 
                 default:
@@ -176,16 +371,96 @@ namespace usbSimCentral
             }
         }
 
+        private void updateInstruments()
+        {
+            if ((InstrumentASI != null) && checkBoxAirSpeedIndicator.Checked)
+            {
+                int airspeedTargetPosition = getPosition(USBSIM_INSTRUMENT_ASSIGNMENTS.ASI, (int)airspeed);
+                if (
+                    (airspeedPosition == int.MinValue) ||
+                    (airspeedPosition == airspeedTargetPosition) ||
+                    (Math.Abs(airspeedTargetPosition - airspeedPosition) > 20)
+                    )
+                {
+                    airspeedPosition = airspeedTargetPosition;
+                }
+                else
+                {
+                    if (airspeedTargetPosition > airspeedPosition)
+                    {
+                        airspeedPosition++;
+                    }
+                    else
+                    {
+                        airspeedPosition--;
+                    }
+                }
+                InstrumentASI.Set1(airspeedPosition);
+            }
+        }
+
+        private int getPosition(USBSIM_INSTRUMENT_ASSIGNMENTS ins, int x)
+        {
+            double y, x0, y0, x1, y1;
+            int i;
+
+            Dictionary<double, double> lookup = new Dictionary<double, double>();
+
+            switch (ins)
+            {
+                case USBSIM_INSTRUMENT_ASSIGNMENTS.ASI:
+                    lookup = LookupASI;
+                    break;
+            }
+
+            if(x > lookup.Keys.ElementAt(lookup.Count - 1))
+            {
+                return int.Parse(lookup.Values.ElementAt(lookup.Count - 1).ToString());
+            }
+
+            for (i = 0; i < lookup.Count; i++)
+            {
+                if (x == lookup.Keys.ElementAt(i))
+                {
+                    return int.Parse(lookup.Values.ElementAt(i).ToString());
+                }
+
+                if (x < lookup.Keys.ElementAt(i))
+                {
+                    break;
+                }
+            }
+
+            if (i == (lookup.Count - 1))
+            {
+                x0 = lookup.Keys.ElementAt(i - 1);
+                x1 = lookup.Keys.ElementAt(i);
+                y0 = lookup.Values.ElementAt(i - 1);
+                y1 = lookup.Values.ElementAt(i);
+            }
+            else
+            {
+                x0 = lookup.Keys.ElementAt(i);
+                x1 = lookup.Keys.ElementAt(i + 1);
+                y0 = lookup.Values.ElementAt(i);
+                y1 = lookup.Values.ElementAt(i + 1);
+            }
+
+            y = y0 + ((x - x0) * ((y1 - y0) / (x1 - x0)));
+
+            return (int)y ;
+        }
+
         private void displayText(string s)
         {
             // remove first string from output 
             output = output.Substring(output.IndexOf("\n") + 1);
 
             // add the new string 
-            output += "\n" + response++ + ": " + s;
+            output += "\n" + s;
 
             // display it 
-            rtbMessages.Text = output;
+            RichTextBoxMessages.Text = output;
         }
 
         public frmMain()
@@ -199,6 +474,10 @@ namespace usbSimCentral
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            DeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+
+
+            addDevice(((int)USBSIM_INSTRUMENT_ASSIGNMENTS.ASI).ToString());
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -222,12 +501,12 @@ namespace usbSimCentral
 
         private void instrumentSelectionStatus(bool status)
         {
-            cbAltimeter.Enabled = status;
-            cbASI.Enabled = status;
-            cbAttitudeIndicator.Enabled = status;
-            cbGyro.Enabled = status;
-            cbTurnSlip.Enabled = status;
-            cbVSI.Enabled = status;
+            checkBoxAirSpeedIndicator.Enabled = status;
+            checkBoxAltimeter.Enabled = status;
+            checkBoxArtificialHorizon.Enabled = status;
+            checkBoxHeadingIndicator.Enabled = status;
+            checkBoxTurnSlipIndicator.Enabled = status;
+            checkBoxVerticalSpeedIndicator.Enabled = status;
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
