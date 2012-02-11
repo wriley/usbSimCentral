@@ -11,6 +11,8 @@ using Microsoft.FlightSimulator.SimConnect;
 using System.Runtime.InteropServices;
 using usbSimInstrument;
 using LibUsbDotNet.DeviceNotify;
+using LibUsbDotNet.Main;
+using LibUsbDotNet;
 
 namespace usbSimCentral
 {
@@ -472,12 +474,28 @@ namespace usbSimCentral
         {
         }
 
+        private void FindDevices()
+        {
+            UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(VENDOR_ID, PRODUCT_ID);
+            UsbRegDeviceList MyUsbRegDeviceList = UsbGlobals.AllDevices.FindAll(MyUsbFinder);
+
+            if (MyUsbRegDeviceList.Count > 0)
+            {
+                foreach (UsbRegistry MyUsbRegistry in MyUsbRegDeviceList)
+                {
+                    displayText(String.Format("Found: {0} - {1}", MyUsbRegistry.Device.Info.SerialString.ToString(), MyUsbRegistry.Name));
+                }
+            }
+            else
+            {
+                displayText("No devices found");
+            }
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             DeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
-
-
-            addDevice(((int)USBSIM_INSTRUMENT_ASSIGNMENTS.ASI).ToString());
+            FindDevices();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
