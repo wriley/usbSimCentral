@@ -44,7 +44,7 @@ namespace usbSimCentral
         const int VENDOR_ID = 0x16C0;
         const int PRODUCT_ID = 0x05DC;
 
-        public static DeviceNotifier DeviceNotifier = new DeviceNotifier();
+        public static IDeviceNotifier UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
 
         double[] TableASI = new double[8];
         double[] RawASI = new double[8];
@@ -477,13 +477,17 @@ namespace usbSimCentral
         private void FindDevices()
         {
             UsbDeviceFinder MyUsbFinder = new UsbDeviceFinder(VENDOR_ID, PRODUCT_ID);
-            UsbRegDeviceList MyUsbRegDeviceList = UsbGlobals.AllDevices.FindAll(MyUsbFinder);
+            UsbRegDeviceList MyUsbRegDeviceList = UsbDevice.AllDevices.FindAll(MyUsbFinder);
 
             if (MyUsbRegDeviceList.Count > 0)
             {
                 foreach (UsbRegistry MyUsbRegistry in MyUsbRegDeviceList)
                 {
                     displayText(String.Format("Found: {0} - {1}", MyUsbRegistry.Device.Info.SerialString.ToString(), MyUsbRegistry.Name));
+                    if ((MyUsbRegistry.Device.Info.Descriptor.VendorID == VENDOR_ID) && (MyUsbRegistry.Device.Info.Descriptor.ProductID == PRODUCT_ID))
+                    {
+                        addDevice(MyUsbRegistry.Device.Info.SerialString);
+                    }
                 }
             }
             else
@@ -494,7 +498,7 @@ namespace usbSimCentral
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            DeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+            UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
             FindDevices();
         }
 
