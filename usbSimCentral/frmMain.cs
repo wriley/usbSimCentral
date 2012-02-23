@@ -125,7 +125,7 @@ namespace usbSimCentral
 
             switch (serial)
             {
-                case "1":
+                case "01":
                     InstrumentASI = new Instrument(serial);
                     TableASI = InstrumentASI.ReadTable();
                     RawASI = InstrumentASI.ReadTableRaw();
@@ -141,7 +141,7 @@ namespace usbSimCentral
                         }
                     }
                     break;
-                case "2":
+                case "02":
                     InstrumentAttitude = new Instrument(serial);
                     TableAttitude = InstrumentAttitude.ReadTable();
                     RawAttitude = InstrumentAttitude.ReadTableRaw();
@@ -157,7 +157,7 @@ namespace usbSimCentral
                         }
                     }
                     break;
-                case "3":
+                case "03":
                     InstrumentAltimiter = new Instrument(serial);
                     TableASI = InstrumentAltimiter.ReadTable();
                     RawASI = InstrumentAltimiter.ReadTableRaw();
@@ -173,7 +173,7 @@ namespace usbSimCentral
                         }
                     }
                     break;
-                case "4":
+                case "04":
                     InstrumentTurnSlip = new Instrument(serial);
                     TableTurnSlip = InstrumentTurnSlip.ReadTable();
                     RawTurnSlip = InstrumentTurnSlip.ReadTableRaw();
@@ -189,7 +189,7 @@ namespace usbSimCentral
                         }
                     }
                     break;
-                case "5":
+                case "05":
                     InstrumentGyro = new Instrument(serial);
                     TableGyro = InstrumentGyro.ReadTable();
                     RawGyro = InstrumentGyro.ReadTableRaw();
@@ -206,7 +206,7 @@ namespace usbSimCentral
                         }
                     }
                     break;
-                case "6":
+                case "06":
                     InstrumentVSI = new Instrument(serial);
                     TableVSI = InstrumentVSI.ReadTable();
                     RawVSI = InstrumentVSI.ReadTableRaw();
@@ -230,22 +230,22 @@ namespace usbSimCentral
             displayText("Removing device: " + serial);
             switch (serial)
             {
-                case "1":
+                case "01":
                     InstrumentASI = null;
                     break;
-                case "2":
+                case "02":
                     InstrumentAttitude = null;
                     break;
-                case "3":
+                case "03":
                     InstrumentAltimiter = null;
                     break;
-                case "4":
+                case "04":
                     InstrumentTurnSlip = null;
                     break;
-                case "5":
+                case "05":
                     InstrumentGyro = null;
                     break;
-                case "6":
+                case "06":
                     InstrumentVSI = null;
                     break;
             }
